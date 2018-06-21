@@ -24,7 +24,6 @@ class MyApp extends StatelessWidget {
       home: new SplashScreen(),
       routes: <String, WidgetBuilder>{
         '/HomePage': (BuildContext context) => new HomePage(),
-        '/ElencoFiltered': (BuildContext context) => new ElencoFilteredSito(),
       },
     );
   }
@@ -124,7 +123,6 @@ class ContainerHomePageState extends State<HomePage> {
                 ),
               ],
             ),
-
             new Row(
               children: [
                 new Expanded(
@@ -135,103 +133,158 @@ class ContainerHomePageState extends State<HomePage> {
                 ),
               ],
             ),
-
             new Container(
               padding: const EdgeInsets.all(16.0),
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  new Container(
-                    padding: const EdgeInsets.all(15.0) ,
-                    margin: const EdgeInsets.all(5.0),
-                    color: UICustom.CompanyColors.green,
-                    child: new Row(
-                      children: [
-                        new Container(
-                          padding: const EdgeInsets.all(5.0) ,
-                          child: new Icon(
-                            Icons.search,
-                            color: Colors.white,
-                            size: 35.0,
-
-                          ),
+                  new GestureDetector(
+                    onTap: () {
+                      //mare adriatico
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            List<Sito> filter = filtra_siti("Mare Adriatico");
+                            List<String> comuni =
+                                prendiSoloComuniDistinct(filter);
+                            FilterPage page =
+                                new FilterPage(comuni, "Mare Adriatico");
+                            return ContainerListSitiState(
+                              page: page,
+                            );
+                          },
                         ),
-
-                        new Expanded(
-                          child: new Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              new Text('Mare Adriatico',
-                                  style: new TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20.0)),
-                            ],
+                      ); //Navigator
+                    },
+                    child: new Container(
+                      padding: const EdgeInsets.all(15.0),
+                      margin: const EdgeInsets.all(5.0),
+                      color: UICustom.CompanyColors.green,
+                      child: new Row(
+                        children: [
+                          new Container(
+                            padding: const EdgeInsets.all(5.0),
+                            child: new Icon(
+                              Icons.search,
+                              color: Colors.white,
+                              size: 35.0,
+                            ),
                           ),
-                        ),
-                      ],
+                          new Expanded(
+                            child: new Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                new Text('Mare Adriatico',
+                                    style: new TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20.0)),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  new Container(
-                    margin: const EdgeInsets.all(5.0),
-                    padding: const EdgeInsets.all(15.0) ,
-                    color: UICustom.CompanyColors.green,
-                    child: new Row(
-                      children: [
-                        new Container(
-                          padding: const EdgeInsets.all(5.0) ,
-                          child: new Icon(
-                            Icons.search,
-                            color: Colors.white,
-                            size: 35.0,
-
-                          ),
+                  new GestureDetector(
+                    onTap: () {
+                      //lago di garda
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            List<Sito> filter2 = filtra_siti("Lago di Garda");
+                            List<String> comuni =
+                                prendiSoloComuniDistinct(filter2);
+                            FilterPage page2 =
+                                new FilterPage(comuni, "Lago di Garda");
+                            return ContainerListSitiState(
+                              page: page2,
+                            );
+                          },
                         ),
-
-                        new Expanded(
-                          child: new Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              new Text('Lago di Garda',
-                                  style: new TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20.0)),
-                            ],
+                      ); //Navigator
+                    },
+                    child: new Container(
+                      margin: const EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.all(15.0),
+                      color: UICustom.CompanyColors.green,
+                      child: new Row(
+                        children: [
+                          new Container(
+                            padding: const EdgeInsets.all(5.0),
+                            child: new Icon(
+                              Icons.search,
+                              color: Colors.white,
+                              size: 35.0,
+                            ),
                           ),
-                        ),
-                      ],
+                          new Expanded(
+                            child: new Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                new Text('Lago di Garda',
+                                    style: new TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20.0)),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  new Container(
-                    margin: const EdgeInsets.all(5.0),
-                    padding: const EdgeInsets.all(15.0) ,
-                    color: UICustom.CompanyColors.green,
-                    child: new Row(
-                      children: [
-                        new Container(
-                          padding: const EdgeInsets.all(5.0) ,
-                          child: new Icon(
-                            Icons.search,
-                            color: Colors.white,
-                            size: 35.0,
-
-                          ),
+                  new GestureDetector(
+                    onTap: () {
+                      // altro
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            List<Sito> filter3 = filtra_siti("Altro");
+                            print(filter3.length);
+                            print(" COMUNI ");
+                            List<String> comuni =
+                                prendiSoloComuniDistinct(filter3);
+                            print(comuni.length);
+                            FilterPage page3 = new FilterPage(comuni, "Altro");
+                            return ContainerListSitiState(
+                              page: page3,
+                            );
+                          },
                         ),
-
-                        new Expanded(
-                          child: new Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              new Text('Altro',
-                                  style: new TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20.0)),
-                            ],
+                      ); //Navigator
+                    },
+                    child: new Container(
+                      margin: const EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.all(15.0),
+                      color: UICustom.CompanyColors.green,
+                      child: new Row(
+                        children: [
+                          new Container(
+                            padding: const EdgeInsets.all(5.0),
+                            child: new Icon(
+                              Icons.search,
+                              color: Colors.white,
+                              size: 35.0,
+                            ),
                           ),
-                        ),
-                      ],
+                          new Expanded(
+                            child: new Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                new Text('Altro',
+                                    style: new TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20.0)),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -244,66 +297,279 @@ class ContainerHomePageState extends State<HomePage> {
   }
 }
 
-class ElencoFilteredSito extends StatefulWidget {
-  @override
-  createState() => new ContainerElencoFilteredSitoState();
+class FilterPage {
+  List<String> siti_filter;
+  String title;
+
+  FilterPage(this.siti_filter, this.title);
 }
 
-class ContainerElencoFilteredSitoState extends State<ElencoFilteredSito> {
-  final _saved = new Set<Sito>();
+class FilterPage2 {
+  List<Sito> siti_filter;
+  String title;
 
-  //List<Sito> _siti = <Sito>[];
+  FilterPage2(this.siti_filter, this.title);
+}
+
+class ContainerListSitiState extends StatelessWidget {
+  final _saved = new Set<Sito>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
+
+  FilterPage page;
+
+  ContainerListSitiState({Key key, @required this.page}) : super(key: key);
+
+  BuildContext context;
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-
+    this.context = context;
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Arpav Balneazione"),
+        title: new Text(page.title),
         actions: <Widget>[
           new IconButton(
               icon: new Icon(Icons.favorite_border),
               onPressed: () => _pushSaved(context, _saved))
         ],
       ),
-      body: (_siti.length > 0)
-          ? _buildSuggestion()
-          : new Text("Errore dati non disponibili"),
+      body: new Container(
+        child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              new Row(
+                children: [
+                  new Expanded(
+                    child: new Image.asset(
+                      'images/topbarlogo.png',
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
+                ],
+              ),
+
+              new Expanded(
+                child:(page.siti_filter.length > 0)
+                    ? _buildSuggestion()
+                    : new Text("Errore dati non disponibili") ,
+              ),
+
+             // new Container(child: ,)
+
+            ]),
+      ),
     );
   }
 
   Widget _buildSuggestion() {
     return new ListView.builder(
+      itemCount: page.siti_filter.length,
       padding: const EdgeInsets.all(16.0),
       itemBuilder: (context, i) {
         if (i.isOdd) return new Divider();
-        //final index = i ~/ 2;
+        final index = i ~/ 2;
 
-        return _buildRow(_siti[i]);
+        return _buildRow(page.siti_filter[index]);
+      },
+    );
+  }
+
+  Widget _buildRow(String sito) {
+    //final alreadySaved = page.siti_filter.contains(sito);
+
+    return new ListTile(
+      title: new Text(sito, style: _biggerFont),
+      trailing: new Icon(
+        Icons.chevron_right,
+        color: UICustom.CompanyColors.green,
+      ),
+      onTap: () {
+        // creare la lista per comune di stringe da aprire
+
+        List<Sito> data = filtra_siti_percomune(sito);
+        FilterPage2 page2 = new FilterPage2(data, sito);
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return ContainerListSitiDettaglioComuneState(
+                page: page2,
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+
+class ContainerListSitiDettaglioComuneState extends StatelessWidget {
+  final _saved = new Set<Sito>();
+  final _biggerFont = const TextStyle(fontSize: 18.0);
+
+  FilterPage2 page;
+  BuildContext context;
+
+  ContainerListSitiDettaglioComuneState({Key key, @required this.page})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+
+    this.context = context;
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text(page.title),
+        actions: <Widget>[
+          new IconButton(
+              icon: new Icon(Icons.favorite_border),
+              onPressed: () => _pushSaved(context, _saved))
+        ],
+      ),
+      body:  new Container(
+        child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              new Row(
+                children: [
+                  new Expanded(
+                    child: new Image.asset(
+                      'images/topbarlogo.png',
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
+                ],
+              ),
+
+              new Expanded(
+                child:(page.siti_filter.length > 0)
+                    ? _buildSuggestion()
+                    : new Text("Errore dati non disponibili") ,
+              ),
+
+              // new Container(child: ,)
+
+            ]),
+      ),
+    );
+  }
+
+  Widget _buildSuggestion() {
+    return new ListView.builder(
+      itemCount: page.siti_filter.length,
+      padding: const EdgeInsets.all(16.0),
+      itemBuilder: (context, i) {
+        if (i.isOdd) return new Divider();
+        final index = i ~/ 2;
+
+        return _buildRow(page.siti_filter[index]);
       },
     );
   }
 
   Widget _buildRow(Sito sito) {
-    final alreadySaved = _saved.contains(sito);
+    //final alreadySaved = page.siti_filter.contains(sito);
+
+    var color = Colors.red;
+
+    if (sito.statoatt == 'BLU') {
+      color = Colors.blue;
+    } else if (sito.statoatt == 'GIALLO') {
+      color = Colors.yellow;
+    }
 
     return new ListTile(
       title: new Text(sito.descr, style: _biggerFont),
+      leading: new Icon(Icons.flag, color: color),
       trailing: new Icon(
-        alreadySaved ? Icons.star : Icons.star_border,
-        color: alreadySaved ? Colors.yellow : null,
+        Icons.chevron_right,
+        color: UICustom.CompanyColors.green,
       ),
       onTap: () {
-        setState(() {
-          if (alreadySaved) {
-            _saved.remove(sito);
-          } else {
-            _saved.add(sito);
-          }
-        });
+        // dettaglio zona
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return ContainerDetailSito(
+                sito: sito,
+              );
+            },
+          ),
+        );
       },
+    );
+  }
+}
+
+class ContainerDetailSito extends StatelessWidget {
+  final _saved = new Set<Sito>();
+  final _biggerFont = const TextStyle(fontSize: 18.0);
+
+  Sito sito;
+
+  ContainerDetailSito({Key key, @required this.sito}) : super(key: key);
+
+  BuildContext context;
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    this.context = context;
+
+    var color = Colors.red;
+
+    if (sito.statoatt == 'BLU') {
+      color = Colors.blue;
+    } else if (sito.statoatt == 'GIALLO') {
+      color = Colors.yellow;
+    }
+
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text(sito.descr),
+        actions: <Widget>[
+          new IconButton(
+              icon: new Icon(Icons.favorite_border),
+              onPressed: () => _pushSaved(context, _saved))
+        ],
+      ),
+      body: new Container(
+        child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              new Row(
+                children: [
+                  new Expanded(
+                    child: new Image.asset(
+                      'images/topbarlogo.png',
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
+                ],
+              ),
+              new Row(children: [
+                new Icon(
+                  Icons.flag,
+                  color: color,
+                  size: 50.0,
+                ),
+                new Column(children: [
+                  new Text(sito.descr),
+                  new Text(sito.comune),
+                  new Text(sito.corpo_idrico),
+                  new Text(sito.statoatt + " " + sito.data_campione),
+                ])
+              ])
+            ]),
+      ),
     );
   }
 }
@@ -330,4 +596,45 @@ void _pushSaved(context, _saved) {
       ),
     );
   }));
+}
+
+List<String> prendiSoloComuniDistinct(List<Sito> siti) {
+  List<String> resutls = new List<String>();
+  for (Sito sito in siti) {
+    if (!resutls.contains(sito.comune.toUpperCase())) {
+      resutls.add(sito.comune.toUpperCase());
+      print("add " + sito.comune.toUpperCase());
+    }
+  }
+  return resutls;
+}
+
+List<Sito> filtra_siti(String string) {
+  List<Sito> resutls = new List<Sito>();
+  for (Sito sito in _siti) {
+    if (string == "Altro") {
+      if (sito.corpo_idrico.toUpperCase() != "LAGO DI GARDA") {
+        if (sito.corpo_idrico.toUpperCase() != "MARE ADRIATICO") {
+          print("added " + sito.corpo_idrico.toUpperCase());
+          resutls.add(sito);
+        }
+      }
+    } else {
+      if (sito.corpo_idrico.toUpperCase() == string.toUpperCase()) {
+        resutls.add(sito);
+      }
+    }
+  }
+
+  return resutls;
+}
+
+List<Sito> filtra_siti_percomune(String string) {
+  List<Sito> resutls = new List<Sito>();
+  for (Sito sito in _siti) {
+    if (sito.comune.toUpperCase() == string.toUpperCase()) {
+      resutls.add(sito);
+    }
+  }
+  return resutls;
 }
