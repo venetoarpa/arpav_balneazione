@@ -8,7 +8,9 @@ import 'theme.dart' as UICustom;
 import 'package:http/http.dart' as http;
 import 'package:xml2json/xml2json.dart';
 
-void main() => runApp(new MyApp());
+void main(){
+  runApp( new MyApp());
+}
 
 List<Sito> _siti;
 
@@ -297,20 +299,6 @@ class ContainerHomePageState extends State<HomePage> {
   }
 }
 
-class FilterPage {
-  List<String> siti_filter;
-  String title;
-
-  FilterPage(this.siti_filter, this.title);
-}
-
-class FilterPage2 {
-  List<Sito> siti_filter;
-  String title;
-
-  FilterPage2(this.siti_filter, this.title);
-}
-
 class ContainerListSitiState extends StatelessWidget {
   final _saved = new Set<Sito>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
@@ -334,6 +322,7 @@ class ContainerListSitiState extends StatelessWidget {
               onPressed: () => _pushSaved(context, _saved))
         ],
       ),
+
       body: new Container(
         child: new Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -360,6 +349,8 @@ class ContainerListSitiState extends StatelessWidget {
 
             ]),
       ),
+
+
     );
   }
 
@@ -430,6 +421,21 @@ class ContainerListSitiDettaglioComuneState extends StatelessWidget {
               onPressed: () => _pushSaved(context, _saved))
         ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.map), onPressed: () {
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return MapsDemo();
+            },
+          ),
+        );
+
+
+      },),
       body:  new Container(
         child: new Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -451,6 +457,8 @@ class ContainerListSitiDettaglioComuneState extends StatelessWidget {
                     ? _buildSuggestion()
                     : new Text("Errore dati non disponibili") ,
               ),
+
+
 
               // new Container(child: ,)
 
@@ -524,11 +532,14 @@ class ContainerDetailSito extends StatelessWidget {
     this.context = context;
 
     var color = Colors.red;
+    var statozona = "Zona permanentemente non idonea.";
 
     if (sito.statoatt == 'BLU') {
       color = Colors.blue;
+      statozona = "Zona idonea.";
     } else if (sito.statoatt == 'GIALLO') {
       color = Colors.yellow;
+      statozona = "Zona temporaneamente non idonea.";
     }
 
     return new Scaffold(
@@ -555,23 +566,157 @@ class ContainerDetailSito extends StatelessWidget {
                   ),
                 ],
               ),
-              new Row(children: [
-                new Icon(
-                  Icons.flag,
-                  color: color,
-                  size: 50.0,
-                ),
-                new Column(children: [
-                  new Text(sito.descr),
-                  new Text(sito.comune),
-                  new Text(sito.corpo_idrico),
-                  new Text(sito.statoatt + " " + sito.data_campione),
-                ])
-              ])
+
+              new Container(
+                  margin: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.all(15.0),
+                  child:  new Text(
+                    sito.comune,
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: UICustom.CompanyColors.green),
+
+                  ),
+              ),
+
+              new Container(
+                margin: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(15.0),
+                color: UICustom.CompanyColors.grey,
+                child: new Row(children: [
+                  new Container (
+                    margin: const EdgeInsets.all(5.0),
+                    child:  new Icon(
+                      Icons.flag,
+                      color: color,
+                      size: 50.0,
+                    ),
+                  ),
+
+                  new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+
+                      children: [
+
+
+                    new Text(sito.descr,
+                        textAlign: TextAlign.left,
+                        style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+                    ),
+
+                    new Text(sito.corpo_idrico,
+                        textAlign: TextAlign.left,
+                        style: new TextStyle(fontSize: 16.0)),
+
+
+                    new Text(statozona,
+                        textAlign: TextAlign.left,
+                        style: new TextStyle(fontSize: 16.0)),
+
+                    new Text(sito.data_campione,
+                        textAlign: TextAlign.left,
+                        style: new TextStyle(fontSize: 16.0)),
+                    new Divider(),
+
+                    new Text("Zona idonea: si intende una\nzona balneabile le cui acque\npresentano valori dei parametri\nnei limiti di legge",
+                        textAlign: TextAlign.left,
+                        style: new TextStyle(fontSize: 16.0)),
+
+                  ])
+                ]),
+              ),
+
+              new Divider(),
+
+
+              new Container(
+
+              ),
+
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+
+                  new Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                    new IconButton(icon:new Icon( Icons.favorite_border, color: Colors.red, size: 35.0,), onPressed: null),
+
+                    new Container(
+                      margin: const EdgeInsets.only(top: 8.0),
+                      child: new Text(
+                        "Aggiungi ai\nPreferiti",
+                        textAlign: TextAlign.center,
+                        style: new TextStyle(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.red,
+
+                        ),
+                      ),
+                    ),
+
+                  ],),
+
+                  new Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                    new IconButton(icon: new Icon (Icons.map, color: UICustom.CompanyColors.green, size: 35.0,),  onPressed: null),
+
+                    new Container(
+                      margin: const EdgeInsets.only(top: 8.0),
+                      child: new Text(
+                        "Vai alla\nMappa",
+                        style: new TextStyle(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w400,
+                          color: UICustom.CompanyColors.green,
+                          ),
+                      ),
+                    ),
+                    
+                  ],)
+
+
+
+                ]
+                ,
+              )
+
             ]),
       ),
     );
   }
+}
+
+class MapsDemo extends StatelessWidget {
+
+
+  @override
+  Widget build(BuildContext context) {
+
+
+    return new Container(
+      child:new Text("mappa") ,
+    );
+  }
+}
+
+
+class FilterPage {
+  List<String> siti_filter;
+  String title;
+
+  FilterPage(this.siti_filter, this.title);
+}
+
+class FilterPage2 {
+  List<Sito> siti_filter;
+  String title;
+
+  FilterPage2(this.siti_filter, this.title);
 }
 
 //todo saved saranno presi da cache app
