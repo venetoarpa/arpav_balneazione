@@ -2,11 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:arpav_balneazione/models/sito.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'theme.dart' as UICustom;
 import 'package:http/http.dart' as http;
 import 'package:xml2json/xml2json.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main(){
   runApp( new MyApp());
@@ -628,11 +630,6 @@ class ContainerDetailSito extends StatelessWidget {
 
               new Divider(),
 
-
-              new Container(
-
-              ),
-
               new Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -658,6 +655,35 @@ class ContainerDetailSito extends StatelessWidget {
                     ),
 
                   ],),
+
+                  new Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new IconButton(icon: new Icon (Icons.info_outline, color: UICustom.CompanyColors.grey, size: 35.0,),  onPressed: ()  {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return InfoPageDemo();
+                            },
+                          ),
+                        );
+                      }),
+
+                      new Container(
+                        margin: const EdgeInsets.only(top: 8.0),
+                        child: new Text(
+                          "\nInformazioni",
+                          style: new TextStyle(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w400,
+                            color: UICustom.CompanyColors.green,
+                          ),
+                        ),
+                      ),
+
+                    ],),
 
                   new Column(
                     mainAxisSize: MainAxisSize.min,
@@ -692,14 +718,52 @@ class ContainerDetailSito extends StatelessWidget {
 }
 
 class MapsDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
 
 
+
+    return new Container(
+      child: new Text("") ,
+    );
+  }
+}
+
+class InfoPageDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
 
     return new Container(
-      child:new Text("mappa") ,
+      child: new Column(
+        children: <Widget>[
+
+          new Text("Informazioni", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0), ),
+          new Divider(),
+          new Text("Informazioni", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0), ),
+
+          new RichText(
+            text: new TextSpan(
+              children: [
+                new TextSpan(
+                  text: 'This is no Link, ',
+                  style: new TextStyle(color: Colors.black),
+                ),
+
+
+                new TextSpan(
+                  text: 'but this is',
+                  style: new TextStyle(color: Colors.blue),
+                  recognizer: TapGestureRecognizer()..onTap = () => launch(
+                      'https://docs.flutter.io/flutter/services/UrlLauncher-class.html')
+                  )
+              ],
+            ),
+          )
+
+
+        ],
+      ) ,
     );
   }
 }
