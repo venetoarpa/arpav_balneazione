@@ -638,6 +638,34 @@ class ContainerDetailSito extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      new IconButton(icon: new Icon (Icons.info_outline, color: Colors.black45 , size: 35.0,),  onPressed: ()  {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return InfoPageDemo();
+                            },
+                          ),
+                        );
+                      }),
+
+                      new Container(
+                        margin: const EdgeInsets.only(top: 8.0),
+                        child: new Text(
+                          "Informazioni\n",
+                          style: new TextStyle(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black45,
+                          ),
+                        ),
+                      ),
+
+                    ],),
+                  new Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
                     new IconButton(icon:new Icon( Icons.favorite_border, color: Colors.red, size: 35.0,), onPressed: null),
 
                     new Container(
@@ -656,34 +684,7 @@ class ContainerDetailSito extends StatelessWidget {
 
                   ],),
 
-                  new Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new IconButton(icon: new Icon (Icons.info_outline, color: UICustom.CompanyColors.grey, size: 35.0,),  onPressed: ()  {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return InfoPageDemo();
-                            },
-                          ),
-                        );
-                      }),
 
-                      new Container(
-                        margin: const EdgeInsets.only(top: 8.0),
-                        child: new Text(
-                          "\nInformazioni",
-                          style: new TextStyle(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w400,
-                            color: UICustom.CompanyColors.green,
-                          ),
-                        ),
-                      ),
-
-                    ],),
 
                   new Column(
                     mainAxisSize: MainAxisSize.min,
@@ -734,37 +735,63 @@ class InfoPageDemo extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-    return new Container(
-      child: new Column(
-        children: <Widget>[
+    return new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Informazioni"),
+        ),
+    body: new ListView(
+      children: <Widget>[
+        new Container(
+          margin: const EdgeInsets.all(16.0),
+          child: new Column(
+            children: <Widget>[
 
-          new Text("Informazioni", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0), ),
-          new Divider(),
-          new Text("Informazioni", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0), ),
+              new Text("Informazioni", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0), ),
+              new Divider(),
+              new RichText(
+                text: new TextSpan(
+                  children: [
+                    new TextSpan(
+                      text: "La qualità delle acque di balneazione è fortemente collegata alla qualità dei corsi d’acqua, agli scarichi ed alle pressioni diffuse sul territorio. \nLa normativa, entrata in vigore nel 2010, prevede che durante la stagione balneare (15 maggio-15 settembre in Veneto), ci sia almeno un controllo al mese ed uno prima dell’inizio della stessa stagione. In caso di esito non favorevole di un'analisi dei 2 parametri batteriologici previsti (Escherichia coli e Enterococchi intestinali) viene data immediata comunicazione al Comune interessato per l’adozione dell’ordinanza di divieto di balneazione che potrà essere revocata a seguito di esito favorevole di una successiva analisi.\n\n"
+                          "I dati analitici ottenuti nell'ambito del monitoraggio sono inviati, appena disponibili, al Portale Acque del Ministero della Salute. Gli stessi dati vanno ad implementare il Sistema Informativo Regionale Ambientale di ARPAV attraverso il quale viene aggiornata la",
+                      style: new TextStyle(color: Colors.black,  fontSize: 16.0),
+                    ),
 
-          new RichText(
-            text: new TextSpan(
-              children: [
-                new TextSpan(
-                  text: 'This is no Link, ',
-                  style: new TextStyle(color: Colors.black),
+                    new TextSpan(
+                        text: ' situazione della balneabilità.',
+                        style: new TextStyle(color: Colors.blue,  fontSize: 16.0),
+                        recognizer: TapGestureRecognizer()..onTap = () => launch(
+                            'http://www.arpa.veneto.it/temi-ambientali/acqua/datiacqua/balneazione_rete.php')
+                    ),
+
+                    new TextSpan(
+                        text: "\n\nPer consultare i risultati analitici di un singolo punto della stagione in corso, cliccare sul comune interessato e successivamente sulla bandierina presente in mappa o in tabella.\nTutte le informazioni sulla balneazione, sulla classificazione e sullo storico sono disponibili sul sito di ARPAV nella sezione ",
+                        style: new TextStyle(color: Colors.black,  fontSize: 16.0)
+                    ),
+                    new TextSpan(
+                        text: "Acque – Balneazione.",
+                        style: new TextStyle(color: Colors.blue,  fontSize: 16.0),
+                        recognizer: TapGestureRecognizer()..onTap = () => launch(
+                            'http://www.arpa.veneto.it/temi-ambientali/acqua/datiacqua/balneazione.php')
+                    ),
+
+                  ],
                 ),
+              )
 
 
-                new TextSpan(
-                  text: 'but this is',
-                  style: new TextStyle(color: Colors.blue),
-                  recognizer: TapGestureRecognizer()..onTap = () => launch(
-                      'https://docs.flutter.io/flutter/services/UrlLauncher-class.html')
-                  )
-              ],
-            ),
-          )
+            ],
+          ) ,
+        ),
+      ],
+    ),
 
 
-        ],
-      ) ,
+
+
+
     );
+
   }
 }
 
