@@ -13,6 +13,8 @@ dependencies:
   xml: "^3.0.0"
   xml2json: "^2.0.14"
   url_launcher: "^3.0.2"
+  shared_preferences: "^0.4.2"
+
 
 dev_dependencies:
   flutter_test:

@@ -10,15 +10,42 @@ import 'package:http/http.dart' as http;
 import 'package:xml2json/xml2json.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main(){
   runApp( new MyApp());
 }
 
-var apiKey = "AIzaSyAsP8OA75-V0ZVpb5shqwQCoUErKxwo8k4";
 const platform = const MethodChannel('samples.flutter.io/battery');
 
 List<Sito> _siti;
+List<Sito> _pref;
+
+_getPreferiti() async {
+  _pref = new List<Sito>();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String preferiti = (prefs.getString('preferiti') ?? "");
+  print('Pressed $preferiti times.');
+  if(preferiti != "") {
+    var json_pref = json.decode(preferiti);
+    for (var jj in json_pref) {
+      _pref.add(Sito.fromJsonSmall(jj));
+    }
+  }
+  print("PREFERITI");
+  print(_pref[0].descr);
+  //await prefs.setInt('counter', counter);
+}
+
+_setPreferiti() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var json_pref = [];
+  for(Sito sito in _pref){
+    json_pref.add(sito.toJson());
+  }
+  await prefs.setString('preferiti', json.encode(json_pref));
+}
+
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -81,6 +108,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    _getPreferiti();
+
     return new Scaffold(
         body: new Container(
       decoration: new BoxDecoration(
@@ -100,9 +130,6 @@ class HomePage extends StatefulWidget {
 }
 
 class ContainerHomePageState extends State<HomePage> {
-  final _saved = new Set<Sito>();
-
-  //List<Sito> _siti = <Sito>[];
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   @override
@@ -113,7 +140,7 @@ class ContainerHomePageState extends State<HomePage> {
         actions: <Widget>[
           new IconButton(
               icon: new Icon(Icons.favorite_border),
-              onPressed: () => _pushSaved(context, _saved))
+              onPressed: () => _pushSaved(context))
         ],
       ),
       body: new Container(
@@ -306,7 +333,6 @@ class ContainerHomePageState extends State<HomePage> {
 }
 
 class ContainerListSitiState extends StatelessWidget {
-  final _saved = new Set<Sito>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   FilterPage page;
@@ -325,7 +351,7 @@ class ContainerListSitiState extends StatelessWidget {
         actions: <Widget>[
           new IconButton(
               icon: new Icon(Icons.favorite_border),
-              onPressed: () => _pushSaved(context, _saved))
+              onPressed: () => _pushSaved(context))
         ],
       ),
 
@@ -412,7 +438,6 @@ class ContainerListSitiState extends StatelessWidget {
 }
 
 class ContainerListSitiDettaglioComuneState extends StatelessWidget {
-  final _saved = new Set<Sito>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   FilterPage2 page;
@@ -435,7 +460,7 @@ class ContainerListSitiDettaglioComuneState extends StatelessWidget {
         actions: <Widget>[
           new IconButton(
               icon: new Icon(Icons.favorite_border),
-              onPressed: () => _pushSaved(context, _saved))
+              onPressed: () => _pushSaved(context))
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
@@ -493,7 +518,7 @@ class ContainerListSitiDettaglioComuneState extends StatelessWidget {
       itemBuilder: (context, i) {
         //if (i.isOdd) return new Divider();
         final index = i ;
-        print(index);
+        print(page.siti_filter[index].descr);
         return new Column(
           children: <Widget>[
             _buildRow(page.siti_filter[index]),
@@ -516,7 +541,7 @@ class ContainerListSitiDettaglioComuneState extends StatelessWidget {
     }
 
     return new ListTile(
-      title: new Text(sito.descr, style: _biggerFont),
+      title: new Text(sito.descr != null ? sito.descr : "np", style: _biggerFont),
       leading: new Icon(Icons.flag, color: color),
       trailing: new Icon(
         Icons.chevron_right,
@@ -541,7 +566,7 @@ class ContainerListSitiDettaglioComuneState extends StatelessWidget {
 }
 
 class ContainerDetailSito extends StatelessWidget {
-  final _saved = new Set<Sito>();
+
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   Sito sito;
@@ -566,13 +591,19 @@ class ContainerDetailSito extends StatelessWidget {
       statozona = "Zona temporaneamente non idonea.";
     }
 
+    Icon icon_favorite =  new Icon( Icons.favorite_border, color: Colors.red, size: 35.0,);
+
+    if(checkIfFavourite(sito)){
+      icon_favorite =  new Icon( Icons.favorite, color: Colors.red, size: 35.0,);
+    }
+
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(sito.descr),
         actions: <Widget>[
           new IconButton(
               icon: new Icon(Icons.favorite_border),
-              onPressed: () => _pushSaved(context, _saved))
+              onPressed: () => _pushSaved(context))
         ],
       ),
       body: new Container(
@@ -688,7 +719,16 @@ class ContainerDetailSito extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                    new IconButton(icon:new Icon( Icons.favorite_border, color: Colors.red, size: 35.0,), onPressed: null),
+
+                    new IconButton(icon: icon_favorite, onPressed: () {
+
+                          _pref.add(sito);
+                          _setPreferiti();
+
+                          icon_favorite = new Icon( Icons.favorite, color: Colors.red, size: 35.0,);
+
+                        }),
+
 
                     new Container(
                       margin: const EdgeInsets.only(top: 8.0),
@@ -712,7 +752,11 @@ class ContainerDetailSito extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                    new IconButton(icon: new Icon (Icons.map, color: UICustom.CompanyColors.green, size: 35.0,),  onPressed: null),
+                    new IconButton(icon: new Icon (Icons.map, color: UICustom.CompanyColors.green, size: 35.0,),  onPressed: () {
+                      List<Sito> tmp = new List<Sito>();
+                      tmp.add(sito);
+                      openMap(tmp, context);
+                    }),
 
                     new Container(
                       margin: const EdgeInsets.only(top: 8.0),
@@ -875,27 +919,20 @@ class FilterPage2 {
 }
 
 //todo saved saranno presi da cache app
-void _pushSaved(context, _saved) {
-  final _biggerFont = const TextStyle(fontSize: 18.0);
+void _pushSaved(context) {
 
-  Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-    final tiles = _saved.map((pair) {
-      return new ListTile(
-        title: new Text(pair.descr, style: _biggerFont),
-      );
-    });
-    final divider =
-        ListTile.divideTiles(context: context, tiles: tiles).toList();
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) {
+        FilterPage2 page2 = new FilterPage2(_pref, "Preferiti");
+        return ContainerListSitiDettaglioComuneState(
+          page: page2
+        );
+      },
+    ),
+  );
 
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Preferiti"),
-      ),
-      body: new ListView(
-        children: divider,
-      ),
-    );
-  }));
 }
 
 List<String> prendiSoloComuniDistinct(List<Sito> siti) {
@@ -939,4 +976,18 @@ List<Sito> filtra_siti_percomune(String string) {
     }
   }
   return resutls;
+}
+
+
+bool checkIfFavourite(Sito sito){
+
+  if(_pref.length > 0 ) {
+    for (Sito s in _pref) {
+      if(s.descr == sito.descr){
+        return true;
+      }
+    }
+  }
+  return false;
+
 }
