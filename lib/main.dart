@@ -9,10 +9,14 @@ import 'theme.dart' as UICustom;
 import 'package:http/http.dart' as http;
 import 'package:xml2json/xml2json.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/services.dart';
 
 void main(){
   runApp( new MyApp());
 }
+
+var apiKey = "AIzaSyAsP8OA75-V0ZVpb5shqwQCoUErKxwo8k4";
+const platform = const MethodChannel('samples.flutter.io/battery');
 
 List<Sito> _siti;
 
@@ -361,10 +365,17 @@ class ContainerListSitiState extends StatelessWidget {
       itemCount: page.siti_filter.length,
       padding: const EdgeInsets.all(16.0),
       itemBuilder: (context, i) {
-        if (i.isOdd) return new Divider();
-        final index = i ~/ 2;
+        //if (i.isOdd) return new Divider();
+        final index = i ;//~/ 2;
 
-        return _buildRow(page.siti_filter[index]);
+        return new Column(
+          children: <Widget>[
+            _buildRow(page.siti_filter[index]),
+            new Divider()
+          ],
+        ) ;
+
+        //return _buildRow(page.siti_filter[index]);
       },
     );
   }
@@ -394,6 +405,7 @@ class ContainerListSitiState extends StatelessWidget {
             },
           ),
         );
+        
       },
     );
   }
@@ -414,6 +426,9 @@ class ContainerListSitiDettaglioComuneState extends StatelessWidget {
     // TODO: implement build
 
     this.context = context;
+    print("Elementi: " );
+    print( this.page.siti_filter.length);
+
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(page.title),
@@ -427,14 +442,16 @@ class ContainerListSitiDettaglioComuneState extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.map), onPressed: () {
 
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return MapsDemo();
-            },
-          ),
-        );
+
+        openMap(page.siti_filter, context);
+        //Navigator.push(
+        //  context,
+        //  MaterialPageRoute(
+        //    builder: (context) {
+        //      return MapsDemo();
+        //    },
+        //  ),
+        //);
 
 
       },),
@@ -474,10 +491,15 @@ class ContainerListSitiDettaglioComuneState extends StatelessWidget {
       itemCount: page.siti_filter.length,
       padding: const EdgeInsets.all(16.0),
       itemBuilder: (context, i) {
-        if (i.isOdd) return new Divider();
-        final index = i ~/ 2;
-
-        return _buildRow(page.siti_filter[index]);
+        //if (i.isOdd) return new Divider();
+        final index = i ;
+        print(index);
+        return new Column(
+          children: <Widget>[
+            _buildRow(page.siti_filter[index]),
+            new Divider()
+          ],
+        ) ;
       },
     );
   }
@@ -540,7 +562,7 @@ class ContainerDetailSito extends StatelessWidget {
       color = Colors.blue;
       statozona = "Zona idonea.";
     } else if (sito.statoatt == 'GIALLO') {
-      color = Colors.yellow;
+      color = Colors.orange;
       statozona = "Zona temporaneamente non idonea.";
     }
 
@@ -718,16 +740,59 @@ class ContainerDetailSito extends StatelessWidget {
   }
 }
 
+String _batteryLevel = 'Unknown battery level.';
+
 class MapsDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
-
-    return new Container(
-      child: new Text("") ,
+    return new Scaffold(
+        appBar: new AppBar(
+        title: new Text("Mappa"),
+        )
+    ,
+    body : new Container(
+      child: new Text(_batteryLevel) ,
+    )
     );
   }
+}
+
+
+openMap(List<Sito> siti , BuildContext context ) async {
+
+  var siti_json = [];
+
+  for(Sito sito in siti){
+    siti_json.add(sito.toJson());
+  }
+
+  try {
+    String sito_clicked = await platform.invokeMethod('getBatteryLevel', <String, dynamic>{
+      "siti" : json.encode(siti_json)
+    });
+    print(sito_clicked);
+    print(json.decode(sito_clicked));
+    Sito sito = Sito.fromJsonSmall(json.decode(sito_clicked));
+    
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return ContainerDetailSito(
+            sito: sito,
+          );
+        },
+      ),
+    );
+    
+    print(_batteryLevel);
+
+  } on PlatformException catch (e) {
+    _batteryLevel = "errore non bello " + e.message;
+  }
+
+
 }
 
 class InfoPageDemo extends StatelessWidget {
@@ -794,7 +859,6 @@ class InfoPageDemo extends StatelessWidget {
 
   }
 }
-
 
 class FilterPage {
   List<String> siti_filter;
@@ -868,8 +932,10 @@ List<Sito> filtra_siti(String string) {
 List<Sito> filtra_siti_percomune(String string) {
   List<Sito> resutls = new List<Sito>();
   for (Sito sito in _siti) {
-    if (sito.comune.toUpperCase() == string.toUpperCase()) {
+
+    if (sito.comune.compareTo(string) == 0) {
       resutls.add(sito);
+      print("AGGINTO" + sito.comune + " " + sito.descr);
     }
   }
   return resutls;

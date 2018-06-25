@@ -45,8 +45,42 @@ class Sito {
       );
   }
 
+  factory Sito.fromJsonSmall(Map<String, dynamic> xml){
+    return Sito(
+        codsqst: xml['codsqst'],
+        stato1arp: xml['stato1arp'] ,
+        statoatt:  xml['statoatt'],
+        data_campione:  xml['data_campione'],
+        numero_campione:  xml['numero_campione'],
+        tipo_analisi:  xml['tipo_analisi'],
+        esito_campione:  xml['esito_campione'],
+        data_validazione:  xml['data_validazione'],
+        descr: xml['descr'] ,
+        comune: xml['comune'] ,
+        x_wgs: xml['x_wgs'] ,
+        y_wgs:  xml['y_wgs'],
+        corpo_idrico:  xml['corpo_idrico']
+    );
+  }
 
 
+    toJson() {
+      return <String, dynamic>{
+          "codsqst" : this.codsqst,
+          "stato1arp" : this.stato1arp,
+          "statoatt" : this.statoatt,
+          "data_campione" : this.data_campione,
+          "numero_campione" : this.numero_campione,
+          "tipo_analisi" : this.tipo_analisi,
+          "esito_campione" : this.esito_campione,
+          "data_validazione" : this.data_validazione,
+          "descr" : this.descr,
+          "comune" : this.comune,
+          "x_wgs" : this.x_wgs,
+          "y_wgs" : this.y_wgs,
+          "corpo_idrico" : this.corpo_idrico,
+      };
+    }
 
 
   /*
