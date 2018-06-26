@@ -11,6 +11,7 @@ import 'package:xml2json/xml2json.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main(){
   runApp( new MyApp());
@@ -29,11 +30,15 @@ _getPreferiti() async {
   if(preferiti != "") {
     var json_pref = json.decode(preferiti);
     for (var jj in json_pref) {
-      _pref.add(Sito.fromJsonSmall(jj));
+
+      Sito p = Sito.fromJsonSmall(jj);
+      if(p.descr != null) {
+        _pref.add(p);
+      }
     }
+    _setPreferiti();
   }
-  print("PREFERITI");
-  print(_pref[0].descr);
+
   //await prefs.setInt('counter', counter);
 }
 
@@ -454,21 +459,38 @@ class ContainerListSitiDettaglioComuneState extends StatelessWidget {
     print("Elementi: " );
     print( this.page.siti_filter.length);
 
+
+
+
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(page.title),
         actions: <Widget>[
+
           new IconButton(
               icon: new Icon(Icons.favorite_border),
-              onPressed: () => _pushSaved(context))
+              onPressed: () {
+                if(page.title != 'Preferiti') {
+                  _pushSaved(context);
+                }
+              })
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.map), onPressed: () {
 
+        if(this.page.siti_filter.length > 0) {
+          openMap(page.siti_filter, context);
+        }else {
 
-        openMap(page.siti_filter, context);
+          Fluttertoast.showToast(
+              msg: "Nessun luogo da mostrare",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIos: 1
+          );
+        }
         //Navigator.push(
         //  context,
         //  MaterialPageRoute(
@@ -553,11 +575,7 @@ class ContainerListSitiDettaglioComuneState extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) {
-              return ContainerDetailSito(
-                sito: sito,
-              );
-            },
+            builder: (_) => new ContainerDetailSitoStateful(sito),
           ),
         );
       },
@@ -565,19 +583,27 @@ class ContainerListSitiDettaglioComuneState extends StatelessWidget {
   }
 }
 
-class ContainerDetailSito extends StatelessWidget {
+class ContainerDetailSitoStateful extends StatefulWidget {
 
-  final _biggerFont = const TextStyle(fontSize: 18.0);
+  final Sito sito;
 
-  Sito sito;
-
-  ContainerDetailSito({Key key, @required this.sito}) : super(key: key);
-
-  BuildContext context;
+  ContainerDetailSitoStateful(this.sito);
 
   @override
+  _ContainerDetailSitoStateful createState() => new _ContainerDetailSitoStateful(this.sito);
+}
+
+class _ContainerDetailSitoStateful extends State<ContainerDetailSitoStateful> {
+  @override
+
+  final _biggerFont = const TextStyle(fontSize: 18.0);
+  Sito sito;
+  BuildContext context;
+  _ContainerDetailSitoStateful(this.sito);
+
   Widget build(BuildContext context) {
     // TODO: implement build
+
     this.context = context;
 
     var color = Colors.red;
@@ -623,14 +649,14 @@ class ContainerDetailSito extends StatelessWidget {
               ),
 
               new Container(
-                  margin: const EdgeInsets.all(5.0),
-                  padding: const EdgeInsets.all(15.0),
-                  child:  new Text(
-                    sito.comune,
-                    textAlign: TextAlign.center,
-                    style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: UICustom.CompanyColors.green),
+                margin: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(15.0),
+                child:  new Text(
+                  sito.comune,
+                  textAlign: TextAlign.center,
+                  style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: UICustom.CompanyColors.green),
 
-                  ),
+                ),
               ),
 
               new Container(
@@ -647,38 +673,41 @@ class ContainerDetailSito extends StatelessWidget {
                     ),
                   ),
 
-                  new Column(
+                  new Flexible(
+
+                  child: new Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
 
                       children: [
 
+                        new Text(sito.descr,
+                          textAlign: TextAlign.left,
+                          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+                        ),
 
-                    new Text(sito.descr,
-                        textAlign: TextAlign.left,
-                        style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
-                    ),
-
-                    new Text(sito.corpo_idrico,
-                        textAlign: TextAlign.left,
-                        style: new TextStyle(fontSize: 16.0)),
+                        new Text(sito.corpo_idrico,
+                            textAlign: TextAlign.left,
+                            style: new TextStyle(fontSize: 16.0)),
 
 
-                    new Text(statozona,
-                        textAlign: TextAlign.left,
-                        style: new TextStyle(fontSize: 16.0)),
+                        new Text(statozona,
+                            textAlign: TextAlign.left,
+                            style: new TextStyle(fontSize: 16.0)),
 
-                    new Text(sito.data_campione,
-                        textAlign: TextAlign.left,
-                        style: new TextStyle(fontSize: 16.0)),
-                    new Divider(),
+                        new Text(sito.data_campione,
+                            textAlign: TextAlign.left,
+                            style: new TextStyle(fontSize: 16.0)),
+                        new Divider(),
 
-                    new Text("Zona idonea: si intende una\nzona balneabile le cui acque\npresentano valori dei parametri\nnei limiti di legge",
-                        textAlign: TextAlign.left,
-                        style: new TextStyle(fontSize: 16.0)),
+                        new Text("Zona idonea: si intende una\nzona balneabile le cui acque\npresentano valori dei parametri\nnei limiti di legge",
+                            textAlign: TextAlign.left,
+                            style: new TextStyle(fontSize: 16.0)),
 
-                  ])
+                      ])
+                  ),
                 ]),
+
               ),
 
               new Divider(),
@@ -720,31 +749,38 @@ class ContainerDetailSito extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
 
-                    new IconButton(icon: icon_favorite, onPressed: () {
+                      new IconButton(icon: icon_favorite, onPressed: () {
 
-                          _pref.add(sito);
-                          _setPreferiti();
+                        setState((){
 
-                          icon_favorite = new Icon( Icons.favorite, color: Colors.red, size: 35.0,);
+                          if(_aggiungirimuovipreferiti(sito)){
+                            icon_favorite = new Icon( Icons.favorite, color: Colors.red, size: 35.0,);
 
-                        }),
+                          }else {
+                            icon_favorite = new Icon( Icons.favorite_border, color: Colors.red, size: 35.0,);
+
+                          }
+
+                        });
+
+                      }),
 
 
-                    new Container(
-                      margin: const EdgeInsets.only(top: 8.0),
-                      child: new Text(
-                        "Aggiungi ai\nPreferiti",
-                        textAlign: TextAlign.center,
-                        style: new TextStyle(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.red,
+                      new Container(
+                        margin: const EdgeInsets.only(top: 8.0),
+                        child: new Text(
+                          "Aggiungi ai\nPreferiti",
+                          textAlign: TextAlign.center,
+                          style: new TextStyle(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.red,
 
+                          ),
                         ),
                       ),
-                    ),
 
-                  ],),
+                    ],),
 
 
 
@@ -752,25 +788,25 @@ class ContainerDetailSito extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                    new IconButton(icon: new Icon (Icons.map, color: UICustom.CompanyColors.green, size: 35.0,),  onPressed: () {
-                      List<Sito> tmp = new List<Sito>();
-                      tmp.add(sito);
-                      openMap(tmp, context);
-                    }),
+                      new IconButton(icon: new Icon (Icons.map, color: UICustom.CompanyColors.green, size: 35.0,),  onPressed: () {
+                        List<Sito> tmp = new List<Sito>();
+                        tmp.add(sito);
+                        openMap(tmp, context);
+                      }),
 
-                    new Container(
-                      margin: const EdgeInsets.only(top: 8.0),
-                      child: new Text(
-                        "Vai alla\nMappa",
-                        style: new TextStyle(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.w400,
-                          color: UICustom.CompanyColors.green,
+                      new Container(
+                        margin: const EdgeInsets.only(top: 8.0),
+                        child: new Text(
+                          "Vai alla\nMappa",
+                          style: new TextStyle(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w400,
+                            color: UICustom.CompanyColors.green,
                           ),
+                        ),
                       ),
-                    ),
-                    
-                  ],)
+
+                    ],)
 
 
 
@@ -782,7 +818,9 @@ class ContainerDetailSito extends StatelessWidget {
       ),
     );
   }
+
 }
+
 
 String _batteryLevel = 'Unknown battery level.';
 
@@ -822,11 +860,8 @@ openMap(List<Sito> siti , BuildContext context ) async {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) {
-          return ContainerDetailSito(
-            sito: sito,
-          );
-        },
+        builder: (_) => new ContainerDetailSitoStateful(sito),
+
       ),
     );
     
@@ -921,17 +956,31 @@ class FilterPage2 {
 //todo saved saranno presi da cache app
 void _pushSaved(context) {
 
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) {
-        FilterPage2 page2 = new FilterPage2(_pref, "Preferiti");
-        return ContainerListSitiDettaglioComuneState(
-          page: page2
-        );
-      },
-    ),
-  );
+
+  if(_pref.length > 0){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+
+          FilterPage2 page2 = new FilterPage2(_pref, "Preferiti");
+          return ContainerListSitiDettaglioComuneState(
+              page: page2
+          );
+        },
+      ),
+    );
+  }else{
+    Fluttertoast.showToast(
+        msg: "Nessun luogo preferito da mostrare",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIos: 1
+    );
+
+  }
+
+
 
 }
 
@@ -978,7 +1027,6 @@ List<Sito> filtra_siti_percomune(String string) {
   return resutls;
 }
 
-
 bool checkIfFavourite(Sito sito){
 
   if(_pref.length > 0 ) {
@@ -989,5 +1037,22 @@ bool checkIfFavourite(Sito sito){
     }
   }
   return false;
+
+}
+
+//return true if added
+//return false id removed
+
+bool _aggiungirimuovipreferiti(Sito sito){
+
+    if(checkIfFavourite(sito)){
+      _pref.remove(sito);
+      _setPreferiti();
+      return false;
+    }else {
+      _pref.add(sito);
+      _setPreferiti();
+      return true;
+    }
 
 }
