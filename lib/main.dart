@@ -145,197 +145,243 @@ class ContainerHomePageState extends State<HomePage> {
         actions: <Widget>[
           new IconButton(
               icon: new Icon(Icons.favorite_border),
-              onPressed: () => _pushSaved(context))
+              onPressed: () => _pushSaved(context)),
+          new IconButton(
+              icon: new Icon(Icons.info_outline),
+              onPressed: () => _openInfo(context))
         ],
       ),
-      body: new Container(
-        child: new Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            new Row(
+      body:  new ListView(
+        children: <Widget>[
+          new Container(
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.max,
               children: [
-                new Expanded(
-                  child: new Image.asset(
-                    'images/topbarlogo.png',
-                    fit: BoxFit.fitWidth,
-                  ),
+                new Row(
+                  children: [
+                    new Expanded(
+                      child: new Image.asset(
+                        'images/topbarlogo.png',
+                        fit: BoxFit.contain,
+                        height: 75.0,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            new Row(
-              children: [
-                new Expanded(
-                  child: new Image.asset(
-                    'images/box1.png',
-                    fit: BoxFit.fitWidth,
-                  ),
+                new Row(
+                  children: [
+
+                    new Expanded(
+                      child:new Container(
+
+                        decoration: new BoxDecoration(
+                          color: UICustom.CompanyColors.bluette
+                        ),
+                        height: 105.0,
+
+                        child:
+
+                            new Row (
+                              children: <Widget>[
+
+                                new Expanded(
+                                  child: new Image.asset(
+                                    'images/prima.png',
+                                    fit: BoxFit.fitHeight,
+
+                                  ),
+                                ),
+
+                                new Container(
+
+                                  child: new Text("Seleziona la Regione di tuo interesse\nper vedere gli aggiornamenti sullo\nstato di balneabilita oppure\nutilizza la funzione Preferiti per\naccedere alla tua lista", style: new TextStyle(color: Colors.black), textAlign: TextAlign.justify,)/* add child content content here */,
+                                ),
+                                new Expanded(
+                                  child: new Image.asset(
+                                    'images/due.png',
+                                    fit: BoxFit.fitHeight,
+
+                                  ),
+                                ),
+                              ],
+                            )
+
+
+                      ),
+                      
+
+
+
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            new Container(
-              padding: const EdgeInsets.all(16.0),
-              child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  new GestureDetector(
-                    onTap: () {
-                      //mare adriatico
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            List<Sito> filter = filtra_siti("Mare Adriatico");
-                            List<String> comuni =
+                new Container(
+                  padding: const EdgeInsets.all(16.0),
+                  child: new Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      new GestureDetector(
+                        onTap: () {
+                          //mare adriatico
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                List<Sito> filter = filtra_siti("Mare Adriatico");
+                                List<String> comuni =
                                 prendiSoloComuniDistinct(filter);
-                            FilterPage page =
+                                FilterPage page =
                                 new FilterPage(comuni, "Mare Adriatico");
-                            return ContainerListSitiState(
-                              page: page,
-                            );
-                          },
+                                return ContainerListSitiState(
+                                  page: page,
+                                );
+                              },
+                            ),
+                          ); //Navigator
+                        },
+                        child: new Container(
+                          padding: const EdgeInsets.all(15.0),
+                          margin: const EdgeInsets.all(5.0),
+                          color: UICustom.CompanyColors.green,
+                          child: new Row(
+                            children: [
+                              new Container(
+                                padding: const EdgeInsets.all(5.0),
+                                child: new Icon(
+                                  Icons.search,
+                                  color: Colors.white,
+                                  size: 35.0,
+                                ),
+                              ),
+                              new Expanded(
+                                child: new Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    new Text('Mare Adriatico',
+                                        style: new TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20.0)),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ); //Navigator
-                    },
-                    child: new Container(
-                      padding: const EdgeInsets.all(15.0),
-                      margin: const EdgeInsets.all(5.0),
-                      color: UICustom.CompanyColors.green,
-                      child: new Row(
-                        children: [
-                          new Container(
-                            padding: const EdgeInsets.all(5.0),
-                            child: new Icon(
-                              Icons.search,
-                              color: Colors.white,
-                              size: 35.0,
-                            ),
-                          ),
-                          new Expanded(
-                            child: new Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                new Text('Mare Adriatico',
-                                    style: new TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20.0)),
-                              ],
-                            ),
-                          ),
-                        ],
                       ),
-                    ),
-                  ),
-                  new GestureDetector(
-                    onTap: () {
-                      //lago di garda
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            List<Sito> filter2 = filtra_siti("Lago di Garda");
-                            List<String> comuni =
+                      new GestureDetector(
+                        onTap: () {
+                          //lago di garda
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                List<Sito> filter2 = filtra_siti("Lago di Garda");
+                                List<String> comuni =
                                 prendiSoloComuniDistinct(filter2);
-                            FilterPage page2 =
+                                FilterPage page2 =
                                 new FilterPage(comuni, "Lago di Garda");
-                            return ContainerListSitiState(
-                              page: page2,
-                            );
-                          },
+                                return ContainerListSitiState(
+                                  page: page2,
+                                );
+                              },
+                            ),
+                          ); //Navigator
+                        },
+                        child: new Container(
+                          margin: const EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(15.0),
+                          color: UICustom.CompanyColors.green,
+                          child: new Row(
+                            children: [
+                              new Container(
+                                padding: const EdgeInsets.all(5.0),
+                                child: new Icon(
+                                  Icons.search,
+                                  color: Colors.white,
+                                  size: 35.0,
+                                ),
+                              ),
+                              new Expanded(
+                                child: new Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    new Text('Lago di Garda',
+                                        style: new TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20.0)),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ); //Navigator
-                    },
-                    child: new Container(
-                      margin: const EdgeInsets.all(5.0),
-                      padding: const EdgeInsets.all(15.0),
-                      color: UICustom.CompanyColors.green,
-                      child: new Row(
-                        children: [
-                          new Container(
-                            padding: const EdgeInsets.all(5.0),
-                            child: new Icon(
-                              Icons.search,
-                              color: Colors.white,
-                              size: 35.0,
-                            ),
-                          ),
-                          new Expanded(
-                            child: new Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                new Text('Lago di Garda',
-                                    style: new TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20.0)),
-                              ],
-                            ),
-                          ),
-                        ],
                       ),
-                    ),
-                  ),
-                  new GestureDetector(
-                    onTap: () {
-                      // altro
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            List<Sito> filter3 = filtra_siti("Altro");
-                            print(filter3.length);
-                            print(" COMUNI ");
-                            List<String> comuni =
+                      new GestureDetector(
+                        onTap: () {
+                          // altro
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                List<Sito> filter3 = filtra_siti("Altro");
+                                print(filter3.length);
+                                print(" COMUNI ");
+                                List<String> comuni =
                                 prendiSoloComuniDistinct(filter3);
-                            print(comuni.length);
-                            FilterPage page3 = new FilterPage(comuni, "Altro");
-                            return ContainerListSitiState(
-                              page: page3,
-                            );
-                          },
+                                print(comuni.length);
+                                FilterPage page3 = new FilterPage(comuni, "Altro");
+                                return ContainerListSitiState(
+                                  page: page3,
+                                );
+                              },
+                            ),
+                          ); //Navigator
+                        },
+                        child: new Container(
+                          margin: const EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(15.0),
+                          color: UICustom.CompanyColors.green,
+                          child: new Row(
+                            children: [
+                              new Container(
+                                padding: const EdgeInsets.all(5.0),
+                                child: new Icon(
+                                  Icons.search,
+                                  color: Colors.white,
+                                  size: 35.0,
+                                ),
+                              ),
+                              new Expanded(
+                                child: new Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    new Text('Altro',
+                                        style: new TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20.0)),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ); //Navigator
-                    },
-                    child: new Container(
-                      margin: const EdgeInsets.all(5.0),
-                      padding: const EdgeInsets.all(15.0),
-                      color: UICustom.CompanyColors.green,
-                      child: new Row(
-                        children: [
-                          new Container(
-                            padding: const EdgeInsets.all(5.0),
-                            child: new Icon(
-                              Icons.search,
-                              color: Colors.white,
-                              size: 35.0,
-                            ),
-                          ),
-                          new Expanded(
-                            child: new Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                new Text('Altro',
-                                    style: new TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20.0)),
-                              ],
-                            ),
-                          ),
-                        ],
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        ],
+      )
     );
   }
 }
+//
 
 class ContainerListSitiState extends StatelessWidget {
   final _biggerFont = const TextStyle(fontSize: 18.0);
@@ -356,7 +402,10 @@ class ContainerListSitiState extends StatelessWidget {
         actions: <Widget>[
           new IconButton(
               icon: new Icon(Icons.favorite_border),
-              onPressed: () => _pushSaved(context))
+              onPressed: () => _pushSaved(context)),
+          new IconButton(
+              icon: new Icon(Icons.info_outline),
+              onPressed: () => _openInfo(context))
         ],
       ),
 
@@ -370,7 +419,8 @@ class ContainerListSitiState extends StatelessWidget {
                   new Expanded(
                     child: new Image.asset(
                       'images/topbarlogo.png',
-                      fit: BoxFit.fitWidth,
+                      fit: BoxFit.contain,
+                      height: 75.0,
                     ),
                   ),
                 ],
@@ -459,9 +509,6 @@ class ContainerListSitiDettaglioComuneState extends StatelessWidget {
     print("Elementi: " );
     print( this.page.siti_filter.length);
 
-
-
-
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(page.title),
@@ -473,7 +520,10 @@ class ContainerListSitiDettaglioComuneState extends StatelessWidget {
                 if(page.title != 'Preferiti') {
                   _pushSaved(context);
                 }
-              })
+              }),
+          new IconButton(
+              icon: new Icon(Icons.info_outline),
+              onPressed: () => _openInfo(context))
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
@@ -512,7 +562,8 @@ class ContainerListSitiDettaglioComuneState extends StatelessWidget {
                   new Expanded(
                     child: new Image.asset(
                       'images/topbarlogo.png',
-                      fit: BoxFit.fitWidth,
+                      fit: BoxFit.contain,
+                      height: 75.0,
                     ),
                   ),
                 ],
@@ -629,193 +680,175 @@ class _ContainerDetailSitoStateful extends State<ContainerDetailSitoStateful> {
         actions: <Widget>[
           new IconButton(
               icon: new Icon(Icons.favorite_border),
-              onPressed: () => _pushSaved(context))
+              onPressed: () => _pushSaved(context)),
+          new IconButton(
+              icon: new Icon(Icons.info_outline),
+              onPressed: () => _openInfo(context))
         ],
       ),
-      body: new Container(
-        child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              new Row(
+      body:
+      new ListView (
+        children: <Widget>[
+          new Container(
+            child: new Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  new Expanded(
-                    child: new Image.asset(
-                      'images/topbarlogo.png',
-                      fit: BoxFit.fitWidth,
-                    ),
+                  new Row(
+                    children: [
+                      new Expanded(
+                        child: new Image.asset(
+                          'images/topbarlogo.png',
+                          fit: BoxFit.contain,
+                          height: 75.0,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
 
-              new Container(
-                margin: const EdgeInsets.all(5.0),
-                padding: const EdgeInsets.all(15.0),
-                child:  new Text(
-                  sito.comune,
-                  textAlign: TextAlign.center,
-                  style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: UICustom.CompanyColors.green),
-
-                ),
-              ),
-
-              new Container(
-                margin: const EdgeInsets.all(5.0),
-                padding: const EdgeInsets.all(15.0),
-                color: UICustom.CompanyColors.grey,
-                child: new Row(children: [
-                  new Container (
+                  new Container(
                     margin: const EdgeInsets.all(5.0),
-                    child:  new Icon(
-                      Icons.flag,
-                      color: color,
-                      size: 50.0,
+                    padding: const EdgeInsets.all(15.0),
+                    child:  new Text(
+                      sito.comune,
+                      textAlign: TextAlign.center,
+                      style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: UICustom.CompanyColors.green),
+
                     ),
                   ),
 
-                  new Flexible(
-
-                  child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-
-                      children: [
-
-                        new Text(sito.descr,
-                          textAlign: TextAlign.left,
-                          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+                  new Container(
+                    margin: const EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.all(15.0),
+                    color: UICustom.CompanyColors.grey,
+                    child: new Row(children: [
+                      new Container (
+                        margin: const EdgeInsets.all(5.0),
+                        child:  new Icon(
+                          Icons.flag,
+                          color: color,
+                          size: 50.0,
                         ),
+                      ),
 
-                        new Text(sito.corpo_idrico,
-                            textAlign: TextAlign.left,
-                            style: new TextStyle(fontSize: 16.0)),
+                      new Flexible(
+
+                          child: new Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+
+                              children: [
+
+                                new Text(sito.descr,
+                                  textAlign: TextAlign.left,
+                                  style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+                                ),
+
+                                new Text(sito.corpo_idrico,
+                                    textAlign: TextAlign.left,
+                                    style: new TextStyle(fontSize: 16.0)),
 
 
-                        new Text(statozona,
-                            textAlign: TextAlign.left,
-                            style: new TextStyle(fontSize: 16.0)),
+                                new Text(statozona,
+                                    textAlign: TextAlign.left,
+                                    style: new TextStyle(fontSize: 16.0)),
 
-                        new Text(sito.data_campione,
-                            textAlign: TextAlign.left,
-                            style: new TextStyle(fontSize: 16.0)),
-                        new Divider(),
+                                new Text(sito.data_campione,
+                                    textAlign: TextAlign.left,
+                                    style: new TextStyle(fontSize: 16.0)),
+                                new Divider(),
 
-                        new Text("Zona idonea: si intende una\nzona balneabile le cui acque\npresentano valori dei parametri\nnei limiti di legge",
-                            textAlign: TextAlign.left,
-                            style: new TextStyle(fontSize: 16.0)),
+                                new Text("Zona idonea: si intende una\nzona balneabile le cui acque\npresentano valori dei parametri\nnei limiti di legge",
+                                    textAlign: TextAlign.left,
+                                    style: new TextStyle(fontSize: 16.0)),
 
-                      ])
+                              ])
+                      ),
+                    ]),
+
                   ),
+
+                  new Divider(),
+
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      new Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+
+                          new IconButton(icon: icon_favorite, onPressed: () {
+
+                            setState((){
+
+                              if(_aggiungirimuovipreferiti(sito)){
+                                icon_favorite = new Icon( Icons.favorite, color: Colors.red, size: 35.0,);
+
+                              }else {
+                                icon_favorite = new Icon( Icons.favorite_border, color: Colors.red, size: 35.0,);
+
+                              }
+
+                            });
+
+                          }),
+
+
+                          new Container(
+                            margin: const EdgeInsets.only(top: 8.0),
+                            child: new Text(
+                              "Aggiungi ai\nPreferiti",
+                              textAlign: TextAlign.center,
+                              style: new TextStyle(
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.red,
+
+                              ),
+                            ),
+                          ),
+
+                        ],),
+
+
+
+                      new Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          new IconButton(icon: new Icon (Icons.map, color: UICustom.CompanyColors.green, size: 35.0,),  onPressed: () {
+                            List<Sito> tmp = new List<Sito>();
+                            tmp.add(sito);
+                            openMap(tmp, context);
+                          }),
+
+                          new Container(
+                            margin: const EdgeInsets.only(top: 8.0),
+                            child: new Text(
+                              "Vai alla\nMappa",
+                              style: new TextStyle(
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.w400,
+                                color: UICustom.CompanyColors.green,
+                              ),
+                            ),
+                          ),
+
+                        ],)
+
+
+
+                    ]
+                    ,
+                  )
+
                 ]),
-
-              ),
-
-              new Divider(),
-
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-
-                  new Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new IconButton(icon: new Icon (Icons.info_outline, color: Colors.black45 , size: 35.0,),  onPressed: ()  {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return InfoPageDemo();
-                            },
-                          ),
-                        );
-                      }),
-
-                      new Container(
-                        margin: const EdgeInsets.only(top: 8.0),
-                        child: new Text(
-                          "Informazioni\n",
-                          style: new TextStyle(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black45,
-                          ),
-                        ),
-                      ),
-
-                    ],),
-                  new Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-
-                      new IconButton(icon: icon_favorite, onPressed: () {
-
-                        setState((){
-
-                          if(_aggiungirimuovipreferiti(sito)){
-                            icon_favorite = new Icon( Icons.favorite, color: Colors.red, size: 35.0,);
-
-                          }else {
-                            icon_favorite = new Icon( Icons.favorite_border, color: Colors.red, size: 35.0,);
-
-                          }
-
-                        });
-
-                      }),
+          ),
+        ],
+      )
 
 
-                      new Container(
-                        margin: const EdgeInsets.only(top: 8.0),
-                        child: new Text(
-                          "Aggiungi ai\nPreferiti",
-                          textAlign: TextAlign.center,
-                          style: new TextStyle(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.red,
-
-                          ),
-                        ),
-                      ),
-
-                    ],),
-
-
-
-                  new Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new IconButton(icon: new Icon (Icons.map, color: UICustom.CompanyColors.green, size: 35.0,),  onPressed: () {
-                        List<Sito> tmp = new List<Sito>();
-                        tmp.add(sito);
-                        openMap(tmp, context);
-                      }),
-
-                      new Container(
-                        margin: const EdgeInsets.only(top: 8.0),
-                        child: new Text(
-                          "Vai alla\nMappa",
-                          style: new TextStyle(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w400,
-                            color: UICustom.CompanyColors.green,
-                          ),
-                        ),
-                      ),
-
-                    ],)
-
-
-
-                ]
-                ,
-              )
-
-            ]),
-      ),
     );
   }
 
@@ -955,8 +988,6 @@ class FilterPage2 {
 
 //todo saved saranno presi da cache app
 void _pushSaved(context) {
-
-
   if(_pref.length > 0){
     Navigator.push(
       context,
@@ -979,9 +1010,17 @@ void _pushSaved(context) {
     );
 
   }
+}
 
-
-
+void _openInfo(BuildContext context) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return InfoPageDemo();
+          },
+        ),
+      );
 }
 
 List<String> prendiSoloComuniDistinct(List<Sito> siti) {

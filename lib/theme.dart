@@ -42,4 +42,19 @@ class CompanyColors {
         900: const Color(0xFFd7d7d7),
       });
 
+  static const MaterialColor bluette = const MaterialColor(
+      0xFFe2e6f1,
+      const <int, Color> {
+        50: const Color(0xFFe2e6f1),
+        100: const Color(0xFFe2e6f1),
+        200: const Color(0xFFe2e6f1),
+        300: const Color(0xFFe2e6f1),
+        400: const Color(0xFFe2e6f1),
+        500: const Color(0xFFe2e6f1),
+        600: const Color(0xFFe2e6f1),
+        700: const Color(0xFFe2e6f1),
+        800: const Color(0xFFe2e6f1),
+        900: const Color(0xFFe2e6f1),
+      });
+//e2e6f1
 }

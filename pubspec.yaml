@@ -15,6 +15,7 @@ dependencies:
   url_launcher: "^3.0.2"
   shared_preferences: "^0.4.2"
   fluttertoast: "^2.0.3"
+  flutter_launcher_icons: "^0.5.2"
 
 
 dev_dependencies:
@@ -43,6 +44,8 @@ flutter:
     - images/splash.png
     - images/box1.png
     - images/topbarlogo.png
+    - images/prima.png
+    - images/due.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 
@@ -68,3 +71,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages
+flutter_icons:
+  image_path: "icons/icon.png"
+  android: true
+  ios: true
