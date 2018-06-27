@@ -889,7 +889,7 @@ openMap(List<Sito> siti , BuildContext context ) async {
     print(sito_clicked);
     print(json.decode(sito_clicked));
     Sito sito = Sito.fromJsonSmall(json.decode(sito_clicked));
-    
+
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -897,7 +897,7 @@ openMap(List<Sito> siti , BuildContext context ) async {
 
       ),
     );
-    
+
     print(_batteryLevel);
 
   } on PlatformException catch (e) {
