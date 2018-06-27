@@ -195,7 +195,7 @@ class ContainerHomePageState extends State<HomePage> {
 
                                 new Container(
 
-                                  child: new Text("Seleziona la Regione di tuo interesse\nper vedere gli aggiornamenti sullo\nstato di balneabilita oppure\nutilizza la funzione Preferiti per\naccedere alla tua lista", style: new TextStyle(color: Colors.black), textAlign: TextAlign.justify,)/* add child content content here */,
+                                  child: new Text("Seleziona la Regione di tuo interesse\nper vedere gli aggiornamenti sullo\nstato di balneabilità oppure\nutilizza la funzione Preferiti per\naccedere alla tua lista", style: new TextStyle(color: Colors.black), textAlign: TextAlign.justify,)/* add child content content here */,
                                 ),
                                 new Expanded(
                                   child: new Image.asset(
