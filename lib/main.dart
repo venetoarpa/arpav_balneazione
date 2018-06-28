@@ -58,6 +58,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Arpav Balneazione',
+      debugShowCheckedModeBanner: false,
       theme: new ThemeData(
         primarySwatch: UICustom.CompanyColors.green,
       ),
