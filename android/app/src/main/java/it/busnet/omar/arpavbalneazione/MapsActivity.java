@@ -79,14 +79,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         List<String> listPermissionsNeeded = new ArrayList<>();
-        if ( ActivityCompat.checkSelfPermission(this.getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION);
-        }
+        //if ( ActivityCompat.checkSelfPermission(this.getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        //    listPermissionsNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        //}
 
         if (ActivityCompat.checkSelfPermission(this.getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
         }
+
         if (!listPermissionsNeeded.isEmpty()) {
             ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),1);
         }else {

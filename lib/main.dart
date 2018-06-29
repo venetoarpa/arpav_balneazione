@@ -1052,8 +1052,20 @@ List<Sito> filtra_siti(String string) {
     }
   }
 
+  resutls = sothNorthToSouth(resutls);
   return resutls;
 }
+
+
+List<Sito> sothNorthToSouth(List<Sito> siti){
+
+  siti.sort((a, b) {
+    return (double.parse(a.y_wgs).compareTo(double.parse(b.y_wgs))) *-1;
+  });
+
+  return siti;
+}
+
 
 List<Sito> filtra_siti_percomune(String string) {
   List<Sito> resutls = new List<Sito>();

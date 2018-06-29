@@ -13,7 +13,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change beforePath="$PROJECT_DIR$/android/.idea/caches/build_file_checksums.ser" afterPath="$PROJECT_DIR$/android/.idea/caches/build_file_checksums.ser" />
-      <change beforePath="$PROJECT_DIR$/arpav_balneazione.iml" afterPath="$PROJECT_DIR$/arpav_balneazione.iml" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/misc.xml" afterPath="$PROJECT_DIR$/android/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" afterPath="$PROJECT_DIR$/android/app/build.gradle" />
+      <change beforePath="$PROJECT_DIR$/android/app/release/app-release.apk" afterPath="$PROJECT_DIR$/android/app/release/app-release.apk" />
+      <change beforePath="$PROJECT_DIR$/android/app/release/output.json" afterPath="$PROJECT_DIR$/android/app/release/output.json" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/debug/res/values/google_maps_api.xml" afterPath="$PROJECT_DIR$/android/app/src/debug/res/values/google_maps_api.xml" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/it/busnet/omar/arpavbalneazione/MapsActivity.java" afterPath="$PROJECT_DIR$/android/app/src/main/java/it/busnet/omar/arpavbalneazione/MapsActivity.java" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/release/res/values/google_maps_api.xml" afterPath="$PROJECT_DIR$/android/app/src/release/res/values/google_maps_api.xml" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" afterPath="$PROJECT_DIR$/lib/main.dart" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
@@ -29,24 +35,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.dart" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="57" column="38" lean-forward="false" selection-start-line="57" selection-start-column="38" selection-end-line="57" selection-end-column="38" />
+            <state relative-caret-position="394">
+              <caret line="1093" column="0" lean-forward="false" selection-start-line="1093" selection-start-column="0" selection-end-line="1093" selection-end-column="0" />
               <folding>
                 <element signature="e#656#1131#0" expanded="false" />
                 <element signature="e#1149#1374#0" expanded="false" />
                 <element signature="e#2191#2831#0" expanded="false" />
+                <element signature="e#3427#3491#0" expanded="false" />
+                <element signature="e#3546#13807#0" expanded="false" />
                 <element signature="e#13865#16588#0" expanded="false" />
                 <element signature="e#14094#15345#0" expanded="false" />
                 <element signature="e#16658#20293#0" expanded="false" />
                 <element signature="e#20352#20524#0" expanded="false" />
                 <element signature="e#27801#28041#0" expanded="false" />
+                <element signature="e#28093#28728#0" expanded="false" />
+                <element signature="e#28773#31897#0" expanded="false" />
                 <element signature="e#31916#32008#0" expanded="false" />
                 <element signature="e#32962#33217#0" expanded="false" />
-                <element signature="e#33257#33744#0" expanded="false" />
-                <element signature="e#33794#34024#0" expanded="false" />
+                <element signature="e#34001#34231#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -55,17 +64,17 @@
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
+            <state relative-caret-position="465">
               <caret line="31" column="40" lean-forward="false" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/android/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3">
+            <state relative-caret-position="214">
               <caret line="20" column="32" lean-forward="false" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
               <folding />
             </state>
@@ -157,8 +166,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -169,14 +176,16 @@
             <path>
               <item name="arpav_balneazione" type="b2602c69:ProjectViewProjectNode" />
               <item name="arpav_balneazione" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
         <option name="show-excluded-files" value="false" />
       </pane>
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -322,7 +331,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Dart Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28551137" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4298541" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4298541" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40516275" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Flutter Outline" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -330,7 +339,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14643237" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14643237" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -373,15 +382,18 @@
             <element signature="e#656#1131#0" expanded="false" />
             <element signature="e#1149#1374#0" expanded="false" />
             <element signature="e#2191#2831#0" expanded="false" />
+            <element signature="e#3427#3491#0" expanded="false" />
+            <element signature="e#3546#13807#0" expanded="false" />
             <element signature="e#13865#16588#0" expanded="false" />
             <element signature="e#14094#15345#0" expanded="false" />
             <element signature="e#16658#20293#0" expanded="false" />
             <element signature="e#20352#20524#0" expanded="false" />
             <element signature="e#27801#28041#0" expanded="false" />
+            <element signature="e#28093#28728#0" expanded="false" />
+            <element signature="e#28773#31897#0" expanded="false" />
             <element signature="e#31916#32008#0" expanded="false" />
             <element signature="e#32962#33217#0" expanded="false" />
-            <element signature="e#33257#33744#0" expanded="false" />
-            <element signature="e#33794#34024#0" expanded="false" />
+            <element signature="e#34001#34231#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -433,15 +445,18 @@
             <element signature="e#656#1131#0" expanded="false" />
             <element signature="e#1149#1374#0" expanded="false" />
             <element signature="e#2191#2831#0" expanded="false" />
+            <element signature="e#3427#3491#0" expanded="false" />
+            <element signature="e#3546#13807#0" expanded="false" />
             <element signature="e#13865#16588#0" expanded="false" />
             <element signature="e#14094#15345#0" expanded="false" />
             <element signature="e#16658#20293#0" expanded="false" />
             <element signature="e#20352#20524#0" expanded="false" />
             <element signature="e#27801#28041#0" expanded="false" />
+            <element signature="e#28093#28728#0" expanded="false" />
+            <element signature="e#28773#31897#0" expanded="false" />
             <element signature="e#31916#32008#0" expanded="false" />
             <element signature="e#32962#33217#0" expanded="false" />
-            <element signature="e#33257#33744#0" expanded="false" />
-            <element signature="e#33794#34024#0" expanded="false" />
+            <element signature="e#34001#34231#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -461,15 +476,18 @@
             <element signature="e#656#1131#0" expanded="false" />
             <element signature="e#1149#1374#0" expanded="false" />
             <element signature="e#2191#2831#0" expanded="false" />
+            <element signature="e#3427#3491#0" expanded="false" />
+            <element signature="e#3546#13807#0" expanded="false" />
             <element signature="e#13865#16588#0" expanded="false" />
             <element signature="e#14094#15345#0" expanded="false" />
             <element signature="e#16658#20293#0" expanded="false" />
             <element signature="e#20352#20524#0" expanded="false" />
             <element signature="e#27801#28041#0" expanded="false" />
+            <element signature="e#28093#28728#0" expanded="false" />
+            <element signature="e#28773#31897#0" expanded="false" />
             <element signature="e#31916#32008#0" expanded="false" />
             <element signature="e#32962#33217#0" expanded="false" />
-            <element signature="e#33257#33744#0" expanded="false" />
-            <element signature="e#33794#34024#0" expanded="false" />
+            <element signature="e#34001#34231#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -543,15 +561,18 @@
             <element signature="e#656#1131#0" expanded="false" />
             <element signature="e#1149#1374#0" expanded="false" />
             <element signature="e#2191#2831#0" expanded="false" />
+            <element signature="e#3427#3491#0" expanded="false" />
+            <element signature="e#3546#13807#0" expanded="false" />
             <element signature="e#13865#16588#0" expanded="false" />
             <element signature="e#14094#15345#0" expanded="false" />
             <element signature="e#16658#20293#0" expanded="false" />
             <element signature="e#20352#20524#0" expanded="false" />
             <element signature="e#27801#28041#0" expanded="false" />
+            <element signature="e#28093#28728#0" expanded="false" />
+            <element signature="e#28773#31897#0" expanded="false" />
             <element signature="e#31916#32008#0" expanded="false" />
             <element signature="e#32962#33217#0" expanded="false" />
-            <element signature="e#33257#33744#0" expanded="false" />
-            <element signature="e#33794#34024#0" expanded="false" />
+            <element signature="e#34001#34231#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -764,30 +785,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/main.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="57" column="38" lean-forward="false" selection-start-line="57" selection-start-column="38" selection-end-line="57" selection-end-column="38" />
-          <folding>
-            <element signature="e#656#1131#0" expanded="false" />
-            <element signature="e#1149#1374#0" expanded="false" />
-            <element signature="e#2191#2831#0" expanded="false" />
-            <element signature="e#13865#16588#0" expanded="false" />
-            <element signature="e#14094#15345#0" expanded="false" />
-            <element signature="e#16658#20293#0" expanded="false" />
-            <element signature="e#20352#20524#0" expanded="false" />
-            <element signature="e#27801#28041#0" expanded="false" />
-            <element signature="e#31916#32008#0" expanded="false" />
-            <element signature="e#32962#33217#0" expanded="false" />
-            <element signature="e#33257#33744#0" expanded="false" />
-            <element signature="e#33794#34024#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
+        <state relative-caret-position="465">
           <caret line="31" column="40" lean-forward="false" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
           <folding />
         </state>
@@ -795,9 +795,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/android/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3">
+        <state relative-caret-position="214">
           <caret line="20" column="32" lean-forward="false" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/main.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="1093" column="0" lean-forward="false" selection-start-line="1093" selection-start-column="0" selection-end-line="1093" selection-end-column="0" />
+          <folding>
+            <element signature="e#656#1131#0" expanded="false" />
+            <element signature="e#1149#1374#0" expanded="false" />
+            <element signature="e#2191#2831#0" expanded="false" />
+            <element signature="e#3427#3491#0" expanded="false" />
+            <element signature="e#3546#13807#0" expanded="false" />
+            <element signature="e#13865#16588#0" expanded="false" />
+            <element signature="e#14094#15345#0" expanded="false" />
+            <element signature="e#16658#20293#0" expanded="false" />
+            <element signature="e#20352#20524#0" expanded="false" />
+            <element signature="e#27801#28041#0" expanded="false" />
+            <element signature="e#28093#28728#0" expanded="false" />
+            <element signature="e#28773#31897#0" expanded="false" />
+            <element signature="e#31916#32008#0" expanded="false" />
+            <element signature="e#32962#33217#0" expanded="false" />
+            <element signature="e#34001#34231#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
