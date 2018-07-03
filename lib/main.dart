@@ -196,7 +196,7 @@ class ContainerHomePageState extends State<HomePage> {
 
                                 new Container(
 
-                                  child: new Text("Seleziona la Regione di tuo interesse\nper vedere gli aggiornamenti sullo\nstato di balneabilità oppure\nutilizza la funzione Preferiti per\naccedere alla tua lista", style: new TextStyle(color: Colors.black), textAlign: TextAlign.justify,)/* add child content content here */,
+                                  child: new Text("Seleziona la zona di tuo interesse\nper vedere gli aggiornamenti sullo\nstato di balneabilità oppure\nutilizza la funzione Preferiti per\naccedere alla tua lista", style: new TextStyle(color: Colors.black), textAlign: TextAlign.justify,)/* add child content content here */,
                                 ),
                                 new Expanded(
                                   child: new Image.asset(
@@ -327,13 +327,13 @@ class ContainerHomePageState extends State<HomePage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                List<Sito> filter3 = filtra_siti("Altro");
+                                List<Sito> filter3 = filtra_siti("Altri corpi idrici");
                                 print(filter3.length);
                                 print(" COMUNI ");
                                 List<String> comuni =
                                 prendiSoloComuniDistinct(filter3);
                                 print(comuni.length);
-                                FilterPage page3 = new FilterPage(comuni, "Altro");
+                                FilterPage page3 = new FilterPage(comuni, "Altri corpi idrici");
                                 return ContainerListSitiState(
                                   page: page3,
                                 );
@@ -754,7 +754,7 @@ class _ContainerDetailSitoStateful extends State<ContainerDetailSitoStateful> {
                                     textAlign: TextAlign.left,
                                     style: new TextStyle(fontSize: 16.0)),
 
-                                new Text(sito.data_campione,
+                                new Text("data campione: " + sito.data_campione,
                                     textAlign: TextAlign.left,
                                     style: new TextStyle(fontSize: 16.0)),
                                 new Divider(),
@@ -955,9 +955,66 @@ class InfoPageDemo extends StatelessWidget {
 
                   ],
                 ),
+              ),
+              new Divider(),
+              new Text("Leggenda", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0), ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      new Column(
+                        children: <Widget>[
+                          new Image.asset(
+                        'images/bluFlag.png',
+                        fit: BoxFit.contain,
+                        height: 50.0,
+                        width: 50.0
+                      )
+                        ]
+                      ),
+                      new Column(
+                        children: <Widget>[new Text("Zona idonea")]
+                      )
+                      
+                    ],
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      new Column(
+                        children: <Widget>[
+                          new Image.asset(
+                        'images/yellowFlag.png',
+                        fit: BoxFit.contain,
+                        height: 50.0,
+                        width: 50.0
+                      )
+                        ]
+                      ),
+                      new Column(
+                        children: <Widget>[new Text("Zona temporaneamente non idonea")]
+                      )
+                      
+                    ],
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      new Column(
+                        children: <Widget>[
+                          new Image.asset(
+                        'images/redFlag.png',
+                        fit: BoxFit.contain,
+                        width: 50.0,
+                        height: 50.0,
+                      )
+                        ]
+                      ),
+                      new Column(
+                        children: <Widget>[new Text("Zona perenemmente non idonea")]
+                      )
+                      
+                    ],
               )
-
-
             ],
           ) ,
         ),

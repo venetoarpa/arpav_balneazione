@@ -46,6 +46,9 @@ flutter:
     - images/topbarlogo.png
     - images/prima.png
     - images/due.png
+    - images/redFlag.png
+    - images/bluFlag.png
+    - images/yellowFlag.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 
