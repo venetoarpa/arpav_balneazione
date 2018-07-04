@@ -233,7 +233,7 @@ class ContainerHomePageState extends State<HomePage> {
                                 List<String> comuni =
                                 prendiSoloComuniDistinct(filter);
                                 FilterPage page =
-                                new FilterPage(comuni, "Mare Adriatico");
+                                new FilterPage(comuni, "Mare Adriatico","MARE ADRIATICO");
                                 return ContainerListSitiState(
                                   page: page,
                                 );
@@ -282,7 +282,7 @@ class ContainerHomePageState extends State<HomePage> {
                                 List<String> comuni =
                                 prendiSoloComuniDistinct(filter2);
                                 FilterPage page2 =
-                                new FilterPage(comuni, "Lago di Garda");
+                                new FilterPage(comuni, "Lago di Garda", "LAGO DI GARDA");
                                 return ContainerListSitiState(
                                   page: page2,
                                 );
@@ -327,13 +327,12 @@ class ContainerHomePageState extends State<HomePage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                List<Sito> filter3 = filtra_siti("Altri corpi idrici");
+                                List<Sito> filter3 = filtra_siti("Altro");
                                 print(filter3.length);
                                 print(" COMUNI ");
-                                List<String> comuni =
-                                prendiSoloComuniDistinct(filter3);
+                                List<String> comuni = prendiSoloCorpiIdriciDistinct(filter3);
                                 print(comuni.length);
-                                FilterPage page3 = new FilterPage(comuni, "Altri corpi idrici");
+                                FilterPage page3 = new FilterPage(comuni, "Altri corpi idrici", "");
                                 return ContainerListSitiState(
                                   page: page3,
                                 );
@@ -359,7 +358,7 @@ class ContainerHomePageState extends State<HomePage> {
                                 child: new Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    new Text('Altro',
+                                    new Text('Altri corpi idrici',
                                         style: new TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -382,7 +381,6 @@ class ContainerHomePageState extends State<HomePage> {
     );
   }
 }
-//
 
 class ContainerListSitiState extends StatelessWidget {
   final _biggerFont = const TextStyle(fontSize: 18.0);
@@ -474,19 +472,40 @@ class ContainerListSitiState extends StatelessWidget {
       onTap: () {
         // creare la lista per comune di stringe da aprire
 
-        List<Sito> data = filtra_siti_percomune(sito);
-        FilterPage2 page2 = new FilterPage2(data, sito);
+        if(page.title == "Altri corpi idrici") {
 
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return ContainerListSitiDettaglioComuneState(
-                page: page2,
-              );
-            },
-          ),
-        );
+          List<Sito> data = filtra_siti_percorpoidrico(sito);
+          List<String> com = prendiSoloComuniDistinct(data);
+          FilterPage pagepage = new FilterPage(com, sito, sito);
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return ContainerListSitiState(
+                  page: pagepage,
+                );
+              },
+            ),
+          );
+
+
+        }else {
+          List<Sito> data = filtra_siti_percomune_corpoIdirco(sito, page.corpo_idrico);
+          FilterPage2 page2 = new FilterPage2(data, sito);
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return ContainerListSitiDettaglioComuneState(
+                  page: page2,
+                );
+              },
+            ),
+          );
+        }
+
         
       },
     );
@@ -542,15 +561,6 @@ class ContainerListSitiDettaglioComuneState extends StatelessWidget {
               timeInSecForIos: 1
           );
         }
-        //Navigator.push(
-        //  context,
-        //  MaterialPageRoute(
-        //    builder: (context) {
-        //      return MapsDemo();
-        //    },
-        //  ),
-        //);
-
 
       },),
       body:  new Container(
@@ -754,7 +764,7 @@ class _ContainerDetailSitoStateful extends State<ContainerDetailSitoStateful> {
                                     textAlign: TextAlign.left,
                                     style: new TextStyle(fontSize: 16.0)),
 
-                                new Text("data campione: " + sito.data_campione,
+                                new Text("Data campione: " + sito.data_campione,
                                     textAlign: TextAlign.left,
                                     style: new TextStyle(fontSize: 16.0)),
                                 new Divider(),
@@ -788,7 +798,6 @@ class _ContainerDetailSitoStateful extends State<ContainerDetailSitoStateful> {
 
                               }else {
                                 icon_favorite = new Icon( Icons.favorite_border, color: Colors.red, size: 35.0,);
-
                               }
 
                             });
@@ -848,32 +857,10 @@ class _ContainerDetailSitoStateful extends State<ContainerDetailSitoStateful> {
           ),
         ],
       )
-
-
     );
   }
 
 }
-
-
-String _batteryLevel = 'Unknown battery level.';
-
-class MapsDemo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-
-    return new Scaffold(
-        appBar: new AppBar(
-        title: new Text("Mappa"),
-        )
-    ,
-    body : new Container(
-      child: new Text(_batteryLevel) ,
-    )
-    );
-  }
-}
-
 
 openMap(List<Sito> siti , BuildContext context ) async {
 
@@ -899,10 +886,10 @@ openMap(List<Sito> siti , BuildContext context ) async {
       ),
     );
 
-    print(_batteryLevel);
+    //print(_batteryLevel);
 
   } on PlatformException catch (e) {
-    _batteryLevel = "errore non bello " + e.message;
+    print( "errore non bello " + e.message);
   }
 
 
@@ -957,9 +944,9 @@ class InfoPageDemo extends StatelessWidget {
                 ),
               ),
               new Divider(),
-              new Text("Leggenda", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0), ),
+              new Text("Legenda", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0), ),
               new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       new Column(
                         children: <Widget>[
@@ -978,7 +965,7 @@ class InfoPageDemo extends StatelessWidget {
                     ],
               ),
               new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       new Column(
                         children: <Widget>[
@@ -997,7 +984,7 @@ class InfoPageDemo extends StatelessWidget {
                     ],
               ),
               new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       new Column(
                         children: <Widget>[
@@ -1033,8 +1020,8 @@ class InfoPageDemo extends StatelessWidget {
 class FilterPage {
   List<String> siti_filter;
   String title;
-
-  FilterPage(this.siti_filter, this.title);
+  String corpo_idrico;
+  FilterPage(this.siti_filter, this.title, this.corpo_idrico);
 }
 
 class FilterPage2 {
@@ -1044,7 +1031,7 @@ class FilterPage2 {
   FilterPage2(this.siti_filter, this.title);
 }
 
-//todo saved saranno presi da cache app
+
 void _pushSaved(context) {
   if(_pref.length > 0){
     Navigator.push(
@@ -1092,6 +1079,17 @@ List<String> prendiSoloComuniDistinct(List<Sito> siti) {
   return resutls;
 }
 
+List<String> prendiSoloCorpiIdriciDistinct(List<Sito> siti) {
+  List<String> resutls = new List<String>();
+  for (Sito sito in siti) {
+    if (!resutls.contains(sito.corpo_idrico.toUpperCase())) {
+      resutls.add(sito.corpo_idrico.toUpperCase());
+      print("add " + sito.corpo_idrico.toUpperCase());
+    }
+  }
+  return resutls;
+}
+
 List<Sito> filtra_siti(String string) {
   List<Sito> resutls = new List<Sito>();
   for (Sito sito in _siti) {
@@ -1123,7 +1121,6 @@ List<Sito> sothNorthToSouth(List<Sito> siti){
   return siti;
 }
 
-
 List<Sito> filtra_siti_percomune(String string) {
   List<Sito> resutls = new List<Sito>();
   for (Sito sito in _siti) {
@@ -1131,6 +1128,31 @@ List<Sito> filtra_siti_percomune(String string) {
     if (sito.comune.compareTo(string) == 0) {
       resutls.add(sito);
       print("AGGINTO" + sito.comune + " " + sito.descr);
+    }
+  }
+  return resutls;
+}
+
+List<Sito> filtra_siti_percomune_corpoIdirco(String string, String corpoidrico) {
+  List<Sito> resutls = new List<Sito>();
+  for (Sito sito in _siti) {
+
+    if (sito.comune.compareTo(string) == 0 && sito.corpo_idrico.compareTo(corpoidrico) == 0) {
+      resutls.add(sito);
+      print("AGGINTO" + sito.comune + " " + sito.descr);
+    }
+  }
+  return resutls;
+}
+
+
+List<Sito> filtra_siti_percorpoidrico(String string) {
+  List<Sito> resutls = new List<Sito>();
+  for (Sito sito in _siti) {
+
+    if (sito.corpo_idrico.compareTo(string) == 0) {
+      resutls.add(sito);
+      print("AGGINTO" + sito.corpo_idrico + " " + sito.descr);
     }
   }
   return resutls;
