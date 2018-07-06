@@ -764,7 +764,7 @@ class _ContainerDetailSitoStateful extends State<ContainerDetailSitoStateful> {
                                     textAlign: TextAlign.left,
                                     style: new TextStyle(fontSize: 16.0)),
 
-                                new Text("Data campione: " + sito.data_campione,
+                                new Text("Data ultimo prelievo: " + sito.data_campione,
                                     textAlign: TextAlign.left,
                                     style: new TextStyle(fontSize: 16.0)),
                                 new Divider(),
